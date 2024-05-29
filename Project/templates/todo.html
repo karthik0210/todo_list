@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        body {
+    background-color: #f8f9fa;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.table .btn {
+    margin-left: 10px;
+}
+
+footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    background-color: #f8f9fa;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">To-Do List</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="todo.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="addtask.html">Add Task</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="viewtasks.html">View Tasks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary text-white" href="Signup.html">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center">Today's Task</h1>
+        <div class="d-flex justify-content-end mb-3">
+            <button class="btn btn-primary">Add New Task</button>
+        </div>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Task Name</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Task 1</td>
+                    <td>Do it today</td>
+                    <td>Pending</td>
+                    <td><button class="btn btn-warning btn-sm">Edit</button></td>
+                    <td><input type="checkbox"></td>
+                </tr>
+                <!-- More tasks can be added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="text-center mt-5">
+        <p>Made by [Your Name]</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js">
+        // Add any JavaScript functionality if needed
+$(document).ready(function() {
+    // Example: Add new task button click event
+    $('button').click(function() {
+        alert('Add new task functionality not implemented yet.');
+    });
+});
+
+    </script>
+</body>
+</html>
