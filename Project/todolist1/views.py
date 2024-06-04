@@ -1,12 +1,12 @@
-from .forms import TaskForm
-from .models import Task
+
+
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login, logout as django_logout
 from django.contrib.auth.models import User
+from .models import Task
+from .forms import TaskForm
 
-
-# Create your views here.
 def signup(request):
     if request.method == "POST":
         username = request.POST.get("username")
@@ -46,60 +46,48 @@ def handlelogin(request):
             login(request, myuser)
             if myuser.is_superuser:  
                 messages.success(request, 'login successful')
-                return redirect('viewtasks')  
+                return redirect('view_tasks')  
             else:
                 messages.success(request, 'User login successful')
-                return redirect('viewtasks') 
+                return redirect('view_tasks') 
         else:
             messages.error(request, 'Invalid Credentials')
             return redirect('login')
         
     return render(request, "login.html")
 
-def view(request):
-    tasks = Task.objects.all()
-    return render(request, 'viewtasks.html', {'tasks': tasks})
-
-def base(request):
-    return render(request, 'base.html')
-
-
-def add(request):
-    if request.method == 'POST':
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('viewtasks')
-    else:
-        form = TaskForm()
-    return render(request, 'addtask.html', {'form': form})
-
-
-def edit_task(request, task_id):
-    task = get_object_or_404(Task, pk=task_id)
-    
-    if request.method == 'POST':
-        form = TaskForm(request.POST, instance=task)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Task updated successfully.')
-            return redirect('viewtasks')
-    else:
-        form = TaskForm(instance=task)
-    
-    return render(request, 'edit_task.html', {'form': form, 'task': task})
-
-def delete_task(request, task_id):
-    task = get_object_or_404(Task, pk=task_id)
-    
-    if request.method == 'POST':
-        task.delete()
-        messages.success(request, 'Task deleted successfully.')
-        return redirect('viewtasks')
-    
-    return render(request, 'delete_task.html', {'task': task})
-
 
 def logout(request):
     django_logout(request)
     return redirect('login')
+
+
+def view_tasks(request):
+    tasks = Task.objects.all()
+    return render(request, 'view_tasks.html', {'tasks': tasks})
+
+def add_task(request):
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view_tasks')
+    return redirect('view_tasks')
+
+def edit_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('view_tasks')
+    else:
+        form = TaskForm(instance=task)
+    return render(request, 'edit_task.html', {'form': form, 'task': task})
+
+def delete_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    if request.method == 'POST':
+        task.delete()
+        return redirect('view_tasks')
+    return redirect('view_tasks')
